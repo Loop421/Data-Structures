@@ -159,7 +159,58 @@ class SinglyLinkedList {
     return false;
   }
   
+  insert(index, val)
+  {
+    /*
+      Insert pseudocode
+      *if the index is less than zero or greater than the length, return false
+      *if the index is the same as the length, push new node to the end of the list
+      *if the index is 0, unshift a new node to the start of the list
+      *Otherwise, using the get method, access the node at the index - 1
+      *Set the next property on that node to be the new node
+      *Set the next property on the new node to be the previous next
+      *Increment the length
+      *return true
+    */
 
+    // if((index < 0) || (index > this.length)) return false;
+
+    // one bang -> ! would return false depend what follow after
+    // two bangs -> !! would return true depend what follow after
+    // if(index == this.length) return !!this.push(val);
+
+    // if(index == 0) return !!this.unShift(val);
+
+    if(index < 0 || index > this.length)
+    {
+      return false;
+    }
+    else if(index == 0)
+    {
+      this.unShift(val);
+      return true;
+    }
+    else if(index == this.length)
+    {
+      this.push(val);
+      return true;
+    }
+    var newNode = new Node(val);
+
+    var prev = this.get(index - 1);
+
+    var temp = prev.next;
+
+    prev.next = newNode;
+
+    newNode.next = temp;
+
+    this.length++
+
+    return true;
+
+
+  }
     
 }
 
