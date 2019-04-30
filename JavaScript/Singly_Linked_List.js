@@ -211,6 +211,72 @@ class SinglyLinkedList {
 
 
   }
+  
+  remove(index)
+  {
+    /*
+      Remove pseudocode
+      *if the index is less than zero or greater than the length return undefinded
+      *if the index is the same as the length - 1, pop
+      *if the is 0, shift
+      *Otherwise, using the get method, access the node at the index - 1
+      *Set the next property on that node to be the next of the next node
+      *Decrement the length
+      *Return the value of the node removed
+    */
+
+    if((index < 0) || (index >= this.length))
+    {
+      return undefined;
+    }
+    else if(index == 0)
+    {
+      return this.shift();
+    }
+    else if(index == this.length - 1)
+    {
+      return this.pop();
+    }
+    
+
+    var prev = this.get(index - 1);
+    var removeNode = prev.next;
+    prev.next = removeNode.next;
+    this.length--;
+    return removeNode;
+
+  }
+
+  reverse()
+  {
+    /*
+      Reverse pseudocode
+      *Swap the head and tail
+      *Create a variable called next
+      *Create a variable called prev
+      *Create a variable called node and initialize it to the head property
+      *Loop through the list
+      *Set next to be the next property on whatever node insert
+      *Set the next property on the node to be whatever prev is
+      *Set prev to be the value of the node variable
+      *Set the node variable to be the value of the next variable
+
+    */
+
+    var node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    var prev = null;
+    var next;
+
+    for(var i = 0; i < this.length; i++)
+    {
+      next = node.next;
+      node.next = prev;
+      prev = node;
+      node = next;
+    }
+  }
     
 }
 
