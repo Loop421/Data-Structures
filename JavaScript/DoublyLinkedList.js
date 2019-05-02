@@ -42,6 +42,7 @@ class DoublyLinkedList
     this.length++;
     return this;
   }
+    
   pop()
   {
     /*
@@ -72,6 +73,37 @@ class DoublyLinkedList
     this.length--;
     return oldTail;
     
+  }
+    
+  shift()
+  {
+    /*
+      If length is 0, return undefined
+      Store the current head property in a variable
+      If the length is 1, set the head and tail to null
+      Otherwise update the head to be the next of the old head
+      Set the head's prev property to null
+      Set the old head's next to null
+      Decrement the length
+      Return old head
+    */
+    if(!this.head) return undefined;
+
+    var oldHead = this.head;
+
+    if(this.length == 1)
+    {
+      this.head = null;
+      this.tail = null;
+    }
+    else 
+    {
+      this.head = oldHead.next;
+      this.head.prev = null;
+      oldHead.next = null;
+    }
+    this.length--;
+    return oldHead;
   }
 
 }
