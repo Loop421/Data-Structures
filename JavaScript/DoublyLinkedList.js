@@ -105,5 +105,137 @@ class DoublyLinkedList
     this.length--;
     return oldHead;
   }
+    
+  unshift(val)
+  {
+    /*
+      Create a new node with the value passed to the function
+      If the length is 0
+        Set the head to be the new node
+        Set the tail to be the new node
+      Otherwise
+        Set the prev property on the head of the list to be the new node
+        Set the next property on the new node to be the head property
+        Update the head to be the new node
+      increment the length
+      Return the list
+    */
+    var newNode = new Node(val);
+
+    if(this.length == 0)
+    {
+      this.head = newNode;
+      this.tail = newNode;
+    }
+    else
+    {
+      this.head.prev = newNode;
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length++;
+    return this;
+  }
+
+  get(index)
+  {
+    /*
+      If the index is less than 0 or greater or equal to the length, return null
+      if the index is less than or equal to half the length of the list
+        loop through the list starting from the head and loop towards the middle
+        return the node once it is found
+      if the index is greater than half the length of the list
+        loop through the list starting from the tail and loop towards the middle
+        return the node once it is found
+
+    */
+
+    if(index < 0 || index >= this.lenght ) return null;
+
+    if(index <= this.length / 2)
+    {
+      var count = 0;
+      var current = this.head;
+      while(count !== index)
+      {
+        current = current.next;
+        count++
+      }
+      console.log(current.val);
+      
+    }
+
+    else
+    {
+      var count = this.length - 1;
+      var current = this.tail;
+      while(count !== index)
+      {
+        current = current.prev;
+        count--;
+      }
+
+      console.log(current.val);
+
+      
+    }
+
+    return current;
+
+  }
+
+  set(index, val)
+  {
+    /*
+      Create a variable which is the result of the get method at the index passed to the function
+      if the get method returns a vaild node, set the value of that node to be the value passed to the function return true
+      Otherwise, return false
+    */
+
+    var foundNode = this.get(index);
+
+    if(foundNode)
+    {
+      foundNode.val = val;
+      return true;
+    }
+    return false;
+  }
+
+  insert(index, val)
+  {
+    /*
+      If the index is less than zero or greater than or equal to the length return false
+      If the index is 0, unshift
+      If the index is the same as the length, push
+      Use the get method to access the index - 1
+      Set the next property on that node to be the new node
+      Set the next property on the new node to be the previous next
+      Increment the length
+      return true
+    */
+
+    if(index < 0 || index >= this.length) return false;
+
+    if(index == 0)
+    {
+      this.unshift(val);
+    }
+    else if(index == this.length)
+    {
+      this.push(val);
+    }
+     var newNode = new Node(val);
+     var foundNode = this.get(index - 1);
+     var temp = foundNode.next; // store link to the other nodes if there are any
+
+     foundNode.next = newNode;
+     newNode.next = temp;
+     
+
+     this.length++;
+     return true;
+    
+  }
 
 }
