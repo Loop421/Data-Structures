@@ -1,3 +1,5 @@
+//LIFO
+
 class Node
 {
   constructor(val)
