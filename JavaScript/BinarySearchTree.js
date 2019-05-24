@@ -110,4 +110,59 @@ class BinarySearchTree
     if(!found) return undefined;
     return current;
   }
+  
+  breadthFirstSearch()
+  {
+    /*
+      *Create a queue and a variable to store the values of nodes visited
+      *Place the root node in the queue
+      *Loop as long as there is anything in the queue
+      *Dequeue a node from the queue and push the value of the node into the variable that stores the nodes
+      *If there is a left property on the node Dequeue - add it to the queue
+      *If there is a right property on the node Dequeue - add it to the 
+      *Return the variable that stores the values
+    */
+    var node = this.root,
+        data = [],
+        queue = [];
+
+    queue.push(node);
+    while(queue.length)
+    {
+      node = queue.shift();
+      data.push(node.val);
+
+      if(node.left) queue.push(node.left);
+      if(node.right) queue.push(node.right);
+    }
+    return data;
+
+  }
+  
+  DFSPerOrder()
+  {
+    /*
+      Depth First Search - PerOrder
+      *Create a variable to store that values of nodes visited
+      *Store the root of the BST in a variable called current
+      *Write a helper function which accepts a node
+      *Push the value of the node to the variable that stores
+      *If the node has a left property, call the helper function with left property on the node
+      *If the node has a right property, call the helper function with right property on the node
+      *Invoke the helper function with the current variable
+      *Return the array of values
+    */
+    var data = [],
+        current = this.root;
+        function traverse(node)
+        {
+          data.push(node.val);
+          if(node.left) traverse(node.left);
+          if(node.right) traverse(node.right);
+        }
+        traverse(current);
+        console.log(data);
+    return data;
+
+  }
 }
